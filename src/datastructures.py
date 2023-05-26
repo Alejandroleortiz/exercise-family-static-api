@@ -44,7 +44,7 @@ class FamilyStructure:
         member['id']=self._generateId()
         member['last_name'] = self.last_name
         self._members.append(member)
-        
+        return member
 
     def delete_member(self, id):
         # fill this method and update the return
@@ -56,6 +56,15 @@ class FamilyStructure:
             if member['id'] == id:
                 return member
         print(f"Member with id {id} not found")
+        
+    def update_member(self, id, member):
+        for i, old_member in enumerate(self._members):
+            if old_member['id'] == id:
+                # update the member details
+                self._members[i] = member
+                return True
+        # If no member with that id was found, return False
+        return False
         
 
     # this method is done, it returns a list with all the family members

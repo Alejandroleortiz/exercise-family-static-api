@@ -36,7 +36,7 @@ def get_members():
     return jsonify({"family": members}), 200
 
 @app.route('/member/<int:id>', methods=['GET'])
-def get_member(id):
+def get_member_by_id(id):
     member = jackson_family.get_member(id)
     
     if member:
@@ -55,7 +55,17 @@ def add_member():
         
     jackson_family.add_member(member)
     
-    return 'Member added succefully', 200
+    return member, 200
+
+
+@app.route('/member/<int:id>', methods=['DELETE'])
+def delete_member(id):
+    member_deleted = jackson_family.delete_member(id)
+    
+    if member_deleted:
+        return jsonify({"done": True}), 200
+    else:
+        return jsonify({"done": False}), 400
 
 
 # this only runs if `$ python src/app.py` is executed
