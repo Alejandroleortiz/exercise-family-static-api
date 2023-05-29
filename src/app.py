@@ -33,14 +33,14 @@ def get_members():
     if not members: # this checks if the list is empty
         return jsonify({"msg":"No members found"}), 404
 
-    return jsonify({"family": members}), 200
+    return jsonify(members), 200
 
 @app.route('/member/<int:id>', methods=['GET'])
 def get_member_by_id(id):
     member = jackson_family.get_member(id)
     
     if member:
-        return jsonify(member), 200
+        return jsonify( member), 200
     else:
         return jsonify({"msg": "Member not found"}), 404
     
@@ -63,9 +63,9 @@ def delete_member(id):
     member_deleted = jackson_family.delete_member(id)
     
     if member_deleted:
-        return jsonify({"done": True}), 200
+        return jsonify({"done": member_deleted}), 200
     else:
-        return jsonify({"done": False}), 400
+        return jsonify({"done": 'Member did not delete'}), 400
 
 
 # this only runs if `$ python src/app.py` is executed
